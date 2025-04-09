@@ -3,20 +3,20 @@
 Created on Mon Dec 20 17:59:35 2021
 
 @author: Eduardo Santos de Oliveira Marques
-@email: eduardo.santos@engenharia.ufjf.br
+@emails: eduardo.santos.oli.mar@gmail.com, eduardo.santos@estudante.ufjf.br
 """
 
 # Importing the model
-from ePL_KRLS_T2FSM import ePL_KRLS_T2FSM
+from ePL_KRLS_FSM_plus import ePL_KRLS_FSM_plus
 
 def models(model, X_train, y_train, X_test, y_test):
     
-    if model == 'ePL-KRLS-T2FSM':
+    if model == 'ePL-KRLS-FSM_plus':
         
         " Metric definition "
     
         # Defining the measure
-        measure = 'ralescu2'
+        measure = 'pappis3'
             # Options in State-of-the-art: 'ePL-KRLS', 'ePL-KRLS-DISCO'
             # Options in Similarity T1: 'pappis1', 'pappis2', 'pappis3', 'jaccard', 
                                       # 'dice', 'zwick', 'chen', 'vector'
@@ -59,8 +59,8 @@ def models(model, X_train, y_train, X_test, y_test):
         " Model hyperparameters stage "
         
         # Setting the hyperparameters
-        alpha = 0.001 # MG: 0.001 ; ST: 0.01                                    Interval <= 1
-        beta = 0.06 # MG: 0.06 ; ST: 0.1                                        Interval = [0, 1]
+        alpha = 0.001 # MG: 0.001 ; ST: 0.01                                   Interval <= 1
+        beta = 0.06 # MG: 0.06 ; ST: 0.1                                       Interval = [0, 1]
         lambda1 = 10**(-7) # MG: 10**(-7) ; ST 10**(-3)                        Interval <= 1
         sigma = 0.3 # MG: 0.3 ; ST: 0.5                                        Interval = [0.2, 0.5]
         omega = 1 # MG: 1 ; ST: 1                                              Interval = 1
@@ -69,11 +69,11 @@ def models(model, X_train, y_train, X_test, y_test):
         " Initializing, training and testing stage "
         
         # Initializing the model
-        Model = ePL_KRLS_T2FSM(alpha = alpha, beta = beta, lambda1 = lambda1, sigma = sigma, tau = beta, e_utility = e_utility, omega = omega, measure = measure, mfA = mfA, mfB = mfB) #Edu
+        Model = ePL_KRLS_FSM_plus(alpha = alpha, beta = beta, lambda1 = lambda1, sigma = sigma, tau = beta, e_utility = e_utility, omega = omega, measure = measure, mfA = mfA, mfB = mfB) 
         # Training the model
-        OutputTraining, Rules = Model.Train(X_train, y_train, measure, mfA, mfB) #Edu
+        OutputTraining, Rules = Model.Train(X_train, y_train, measure, mfA, mfB) 
         # Testing the model
-        OutputTest = Model.Test(X_test, y_test, measure, mfA, mfB) #Edu
+        OutputTest = Model.Test(X_test, y_test, measure, mfA, mfB) 
         
         return OutputTest, Rules
     

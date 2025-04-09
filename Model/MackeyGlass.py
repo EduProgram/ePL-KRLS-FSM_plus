@@ -3,7 +3,7 @@
 Created on Thu Jun 17 15:55:26 2021
 
 @author: Eduardo Santos de Oliveira Marques
-@email: eduardo.santos@engenharia.ufjf.br
+@emails: eduardo.santos.oli.mar@gmail.com, eduardo.santos@estudante.ufjf.br
 """
 
 # Importing libraries
@@ -27,13 +27,13 @@ t = process_time()
 """ Model definition stage """
 
 # Define the model
-model = 'ePL-KRLS-T2FSM'
+model = 'ePL-KRLS-FSM_plus'
 
 
 """ Calculation stage """
 
 # Importing the data (change the path)
-Data = pd.read_excel (r'C:/Users/Eduardo/Documents/GitHub/ePL-KRLS-T2FSM/Datasets/MackeyGlass.xlsx', header=None)
+Data = pd.read_excel (r'C:/PATH_FOLDER/ePL-KRLS-FSM_plus/Datasets/MackeyGlass.xlsx', header=None)
 
 # Changing to matrix
 Data = Data.to_numpy()
@@ -114,13 +114,10 @@ elapsed_time = process_time() - t
 """ Results """
 
 print()
-# Printing the Datase
+# Printing the Dataset
 print("Dataset = MackeyGlass with Delay =", tau)
 # Printing the model
 print("Model = ", model) 
-# Printing the measure (if the model's ePL-KRLS-SDM)
-# if model == 'ePL-KRLS-FSM':
-#        print("Measure = ", measure)
 print()
 # Printing the RMSE
 print("RMSE = ", RMSE)
@@ -160,9 +157,9 @@ plt.figure(figsize=(19.20,10.80))
 plt.rc('font', size=30)
 plt.rc('axes', titlesize=30)
 plt.plot(y[-500:,], label='Actual Value', color='red')
-plt.plot(OutputTestDenormalized[-500:,], color='blue', label='ePL-KRLS-FSM_r2')
+plt.plot(OutputTestDenormalized[-500:,], color='blue', label=name_model)
 plt.ylabel('Output')
 plt.xlabel('Samples')
 plt.legend(loc='upper right')
-plt.savefig(f'Graphics/Plots2.eps', format='eps', dpi=1200)
+# plt.savefig(f'Graphics', format='eps', dpi=1200)
 plt.show()

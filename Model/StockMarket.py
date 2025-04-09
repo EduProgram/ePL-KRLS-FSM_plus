@@ -3,7 +3,7 @@
 Created on Sun Feb 13 16:25:02 2022
 
 @author: Eduardo Santos de Oliveira Marques
-@email: eduardo.santos@engenharia.ufjf.br
+@emails: eduardo.santos.oli.mar@gmail.com, eduardo.santos@estudante.ufjf.br
 """
 # Importing libraries
 import math
@@ -15,7 +15,7 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_percentage_error, r2_score
 
-from time import process_time #Edu
+from time import process_time 
 
 # Calling the models
 import parameters as pm
@@ -27,14 +27,14 @@ t = process_time()
 
 """ Model definition stage """
 
-# Define the model (#Edu)
-model = 'ePL-KRLS-T2FSM'
+# Define the model 
+model = 'ePL-KRLS-FSM_plus'
     
 
 """ Calculation stage """
 
 # Importing the data
-Data = pd.read_csv(r'C:/Users/Eduardo/Documents/GitHub/ePL-KRLS-T2FSM/Datasets/TAIEX.csv', header=0) #Edu    
+Data = pd.read_csv(r'C:/PATH_FOLDER/ePL-KRLS-FSM_plus/Datasets/TAIEX.csv', header=0)     
 
 # Convert the date to datetime64
 Data['Date'] = pd.to_datetime(Data['Date'], format='%Y-%m-%d')
@@ -106,10 +106,10 @@ elapsed_time = process_time() - t
 """ Results """
 
 print()
-# Printing the Dataset (#Edu)
+# Printing the Dataset 
 print("Dataset = TAIEX")
-# Printing the model (#Edu)
-print("Model = ", model) #Edu
+# Printing the model 
+print("Model = ", model) 
 print()
 # Printing the ER^2
 print("ER^2  = ", ER_2)
@@ -127,8 +127,8 @@ name_model = """Model name"""
 
 # Plotting the graphic of the actual time series and its prediction
 plt.plot(y[-300:,], label='Actual Value', color='red')
-plt.plot(OutputTestDenormalized[-300:,], color='blue', label=name_model) #Edu
-plt.suptitle('Predictions of ' + model) #Edu
+plt.plot(OutputTestDenormalized[-300:,], color='blue', label=name_model) 
+plt.suptitle('Predictions of ' + model) 
 plt.ylabel('Output')
 plt.xlabel('Samples')
 plt.legend()
@@ -136,7 +136,7 @@ plt.show()
 
 # Plotting rules' evolution of the model
 plt.plot(Rules, color='blue')
-plt.suptitle('Predictions of ' + model) #Edu
+plt.suptitle('Predictions of ' + model) 
 plt.ylabel('Number of Fuzzy Rules')
 plt.xlabel('Samples')
 plt.show()
@@ -146,9 +146,9 @@ plt.figure(figsize=(19.20,10.80))
 plt.rc('font', size=30)
 plt.rc('axes', titlesize=30)
 plt.plot(y[-500:,], label='Actual Value', color='red')
-plt.plot(OutputTestDenormalized[-500:,], color='blue', label='ePL-KRLS-T2FSM_p3 \n ePL-KRLS-T2FSM_zl \n ePL-KRLS-T2FSM_ma \n ePL-KRLS-T2FSM_hy')
+plt.plot(OutputTestDenormalized[-500:,], color='blue', label=name_model)
 plt.ylabel('Output')
 plt.xlabel('Samples')
 plt.legend(loc='upper right')
-plt.savefig(f'Graphics/Plots2.eps', format='eps', dpi=1200)
+# plt.savefig(f'Graphics', format='eps', dpi=1200)
 plt.show()

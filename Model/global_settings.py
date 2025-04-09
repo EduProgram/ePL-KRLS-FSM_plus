@@ -9,7 +9,7 @@ global_x_disc = 101
 global_alpha_disc = 10
 global_zlevel_disc = 4
 
-# parameters of integrate the distance metrics (#Edu)
+# parameters of integrate the distance metrics
 abs_e = 1.49e-08  # default is: 1.49e-08
 rel_e = 1.49e-08  # default is: 1.49e-08
 lim = 50  # default is: 50
@@ -61,10 +61,10 @@ def get_z_points():
 
 def get_z_level_heatmap():
     """Get a list of hex colours for the heat map of zSlices."""
-    return list(cl.Color('blue').range_to(cl.Color('red'), global_zlevel_disc)) #Edu
+    return list(cl.Color('blue').range_to(cl.Color('red'), global_zlevel_disc)) 
 
 
 def get_z_level_greyscale():
     """Get a list of hex colours for the heat map of zSlices."""
-    return list(cl.Color('#BBBBBB').range_to(cl.Color('#222222'), #Edu
+    return list(cl.Color('#BBBBBB').range_to(cl.Color('#222222'), 
                 global_zlevel_disc))

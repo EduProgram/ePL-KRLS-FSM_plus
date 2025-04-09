@@ -1,10 +1,10 @@
-from numpy import linspace, e, sqrt, linalg, corrcoef #Edu
+from numpy import linspace, e, sqrt, linalg, corrcoef 
 from decimal import Decimal
 import functools
 from copy import deepcopy
 from scipy import integrate
-from fuzzy_sets import AlphaCutError, ZLevelError #Edu
-import global_settings as gs #Edu
+from fuzzy_sets import AlphaCutError, ZLevelError 
+import global_settings as gs 
 from fuzzy_sets import FuzzySet, DiscreteT1FuzzySet #'distance_it2', 'similarity_gt2'
 from collections import defaultdict #'similarity_gt2'
 
@@ -124,7 +124,7 @@ def vector(fs1, fs2):
 #------------------------------------------------------------------------------
 """This module contains similarity measures for general type-2 fuzzy sets."""
 
-def jaccard_gt2(fs1, fs2): #Edu
+def jaccard_gt2(fs1, fs2): 
     """Calculate the weighted average of the jaccard similarity on zslices."""
     top = 0
     bottom = 0
@@ -316,7 +316,7 @@ def bustince(fs1, fs2, t_norm_min=True):
     return min(yl_ab, yl_ba), min(yu_ab, yu_ba)
 
 
-def jaccard_it2(fs1, fs2): #Edu
+def jaccard_it2(fs1, fs2): 
     """Ratio between the intersection and union of the fuzzy sets."""
     top = 0
     bottom = 0
@@ -344,7 +344,7 @@ def zheng(fs1, fs2):
     return gs.rnd(Decimal('0.5') * ((top_a / bottom_a) + (top_b / bottom_b)))
 
 
-def vector_it2(fs1, fs2): #Edu
+def vector_it2(fs1, fs2): 
     """Vector similarity based on the distance and similarity of shapes."""
     fs1_c = fs1.calculate_overall_centre_of_sets()
     fs2_c = fs2.calculate_overall_centre_of_sets()
@@ -398,7 +398,7 @@ def ralescu1(fs1, fs2):
     """Calculate the average Hausdorff distance over all alpha-cuts."""
     def haus(alpha):
         return _hausdorff(fs1, fs2, alpha)
-    a, b = integrate.quad(haus, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) #Edu
+    a, b = integrate.quad(haus, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) 
     return gs.rnd(a)
 
 
@@ -456,8 +456,8 @@ def _grzegorzewski_non_inf_p(fs1, fs2, p=2):
         fs1_l, fs1_u = fs1.calculate_alpha_cut(alpha)
         fs2_l, fs2_u = fs2.calculate_alpha_cut(alpha)
         return pow(fs1_u - fs2_u, p)
-    left_dist, b = integrate.quad(get_left_dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) #Edu
-    right_dist, b = integrate.quad(get_right_dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) #Edu
+    left_dist, b = integrate.quad(get_left_dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) 
+    right_dist, b = integrate.quad(get_right_dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) 
     return Decimal(left_dist), Decimal(right_dist)
 
 
@@ -547,7 +547,7 @@ def yao_wu(fs1, fs2):
         fs2_min, fs2_max = fs2.calculate_alpha_cut(alpha)
         diff = fs1_min + fs1_max - fs2_min - fs2_max
         return diff
-    a, b = integrate.quad(dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) #Edu
+    a, b = integrate.quad(dist, 0, 1, epsabs=gs.abs_e, epsrel=gs.rel_e, limit=gs.lim) 
     return gs.rnd(Decimal('0.5') * Decimal(a))
 
 
@@ -617,7 +617,7 @@ def _zslice_distance(fs1, fs2, z):
                 count = True
                 fs1_cut = mf_pair[0](alpha, z)
                 fs2_cut = mf_pair[1](alpha, z)
-                diff = _get_directional_distance(fs1_cut, fs2_cut) #Edu
+                diff = _get_directional_distance(fs1_cut, fs2_cut) 
             except AlphaCutError:
                 # If both sets have a null alpha cut then ignore it
                 # (count=False). If only one is empty then replace it with
@@ -636,7 +636,7 @@ def _zslice_distance(fs1, fs2, z):
                     alpha2 = mf_maxes[mf_index][1]
                     fs2_cut = mf_pair[1](alpha2, z)
                 if count:
-                    diff = _get_directional_distance(fs1_cut, #Edu
+                    diff = _get_directional_distance(fs1_cut, 
                                                                  fs2_cut)
             # count is zero if the alpha cut is empty for both fuzzy sets
             if count:
@@ -645,7 +645,7 @@ def _zslice_distance(fs1, fs2, z):
     return gs.rnd(top / bottom)
 
 
-def mcculloch_gt2(fs1, fs2): #Edu
+def mcculloch_gt2(fs1, fs2): 
     """Calculate the weighted Minkowski (r=1) directional distance."""
     top = 0
     bottom = 0
@@ -697,7 +697,7 @@ def figueroa_garcia_centres_minkowski(fs1, fs2):
             abs(fs1_centre[1] - fs2_centre[1]))
 
 
-def mcculloch_it2(fs1, fs2): #Edu
+def mcculloch_it2(fs1, fs2): 
     """Calculate the weighted Minkowski (r=1) directional distance."""
     def order_lower_upper(fs):
         if ((fs.mf1.x_min <= fs.mf2.x_min and
@@ -708,9 +708,9 @@ def mcculloch_it2(fs1, fs2): #Edu
             return fs.mf2, fs.mf1
     fs1_lower_mf, fs1_upper_mf = order_lower_upper(fs1)
     fs2_lower_mf, fs2_upper_mf = order_lower_upper(fs2)
-    return gs.rnd((mcculloch(FuzzySet(fs1_lower_mf), #edu
+    return gs.rnd((mcculloch(FuzzySet(fs1_lower_mf), 
                                          FuzzySet(fs2_lower_mf)) +
-                   mcculloch(FuzzySet(fs1_upper_mf), #Edu
+                   mcculloch(FuzzySet(fs1_upper_mf), 
                                          FuzzySet(fs2_upper_mf))) /
                 Decimal(2))
 
@@ -732,8 +732,8 @@ def compatibility(fs1, fs2, w0=0.7, w1=0.3):
     """
     w0 = Decimal(str(w0))
     w1 = Decimal(str(w1))
-    similarity = jaccard(fs1, fs2) #Edu
-    distance = mcculloch(fs1, fs2) #Edu
+    similarity = jaccard(fs1, fs2) 
+    distance = mcculloch(fs1, fs2) 
     max_distance = max(fs1.uod[1], fs2.uod[1]) - min(fs1.uod[0], fs1.uod[0])
     distance = distance / max_distance
     dissimilarity = 1 - similarity
@@ -745,7 +745,7 @@ def compatibility(fs1, fs2, w0=0.7, w1=0.3):
 
 # Module 'entropy_t1'
 #------------------------------------------------------------------------------
-"""This module contains entropy measures for type-1 sets.""" #Edu
+"""This module contains entropy measures for type-1 sets.""" 
 
 def kosko(fs):
     """Calculate the degree to which the fuzzy set is fuzzy."""
@@ -760,7 +760,7 @@ def kosko(fs):
 
 # Module 'entropy_it2'
 #------------------------------------------------------------------------------
-"""This module contains entropy measures for interval type-2 fuzzy sets.""" #Edu
+"""This module contains entropy measures for interval type-2 fuzzy sets.""" 
 
 def szmidt_pacprzyk(fs):
     """Calculate the ratio between the upper & lower membership functions."""
@@ -773,8 +773,8 @@ def szmidt_pacprzyk(fs):
     return gs.rnd((ent1 / ent2) / Decimal(gs.global_x_disc))
 
 
-def zeng_li_entropy(fs): #Edu
-    """Calculate entropy based on the sum of upper and lower memberships.""" #Edu
+def zeng_li_entropy(fs): 
+    """Calculate entropy based on the sum of upper and lower memberships.""" 
     result = 0
     for x in gs.get_x_points():
         l, u = fs.calculate_membership(x)

@@ -3,7 +3,7 @@
 Created on Thu Jun 17 15:27:20 2021
 
 @author: Eduardo Santos de Oliveira Marques
-@email: eduardo.santos@engenharia.ufjf.br
+@emails: eduardo.santos.oli.mar@gmail.com, eduardo.santos@estudante.ufjf.br
 """
 # Importing libraries
 import pandas as pd
@@ -16,7 +16,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning) # pandas (append -> concat)
 
 
-class ePL_KRLS_T2FSM:    
+class ePL_KRLS_FSM_plus:    
     def __init__(self, alpha = 0.001, beta = 0.05, lambda1 = 0.0000001, sigma = 0.5, tau = 0.05, omega = 1, e_utility = 0.05, measure = 'pappis1', mfA = 'gaussian_t1', mfB = 'gaussian_t1'):
         self.hyperparameters = pd.DataFrame({'alpha':[alpha],'beta':[beta], 'lambda1':[lambda1], 'sigma':[sigma], 'tau':[tau], 'omega':[omega], 'e_utility':[e_utility]})
         self.parameters = pd.DataFrame(columns = ['Center', 'Dictionary', 'nu', 'P', 'Q', 'Theta','ArousalIndex', 'Utility', 'SumLambda', 'TimeCreation', 'CompatibilityMeasure'])
