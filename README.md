@@ -13,8 +13,8 @@ Please cite this paper if the code helps.
 For any queries, suggestions or questions about the codes, please contact Eduardo Santos (eduardo.santos.oli.mar@gmail.com, eduardo.santos@estudante.ufjf.br).
 
 ## Link
-DOI: 10.48550/ARXIV.2502.03650
-PDF: https://arxiv.org/pdf/2502.03650
+- DOI: 10.48550/ARXIV.2502.03650
+- PDF: https://arxiv.org/pdf/2502.03650
 
 ## BibTeX
 @article{marques2025rule,
